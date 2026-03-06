@@ -72,4 +72,4 @@ class PalindromeService {
 
         return input.equalsIgnoreCase(reversed);
     }
-}
+}//ty
