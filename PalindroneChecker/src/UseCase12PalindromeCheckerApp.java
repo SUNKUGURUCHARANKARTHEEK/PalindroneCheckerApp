@@ -1,9 +1,7 @@
-import java.util.Scanner;
-
 /**
- * =====================================================
- * MAIN CLASS - UseCase11PalindromeCheckerApp
- * =====================================================
+ * ================================================================
+ * MAIN CLASS – UseCase11PalindromeCheckerApp
+ * ================================================================
  *
  * Use Case 11: Object-Oriented Palindrome Service
  *
@@ -20,8 +18,10 @@ import java.util.Scanner;
  * - Separation of concerns
  *
  * @author Developer
- * @version 11.0
+ * @version 1.0
  */
+
+import java.util.Scanner;
 
 public class UseCase11PalindromeCheckerApp {
 
@@ -33,18 +33,17 @@ public class UseCase11PalindromeCheckerApp {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        PalindromeService service = new PalindromeService();
 
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
-        PalindromeService service = new PalindromeService();
-
         boolean result = service.checkPalindrome(input);
 
         if (result) {
-            System.out.println("The given string is a Palindrome.");
+            System.out.println("The input string is a palindrome.");
         } else {
-            System.out.println("The given string is NOT a Palindrome.");
+            System.out.println("The input string is not a palindrome.");
         }
 
         scanner.close();
@@ -64,12 +63,18 @@ class PalindromeService {
      */
     public boolean checkPalindrome(String input) {
 
-        String reversed = "";
+        String cleaned = input.replaceAll("\\s+", "").toLowerCase();
+        int left = 0;
+        int right = cleaned.length() - 1;
 
-        for (int i = input.length() - 1; i >= 0; i--) {
-            reversed += input.charAt(i);
+        while (left < right) {
+            if (cleaned.charAt(left) != cleaned.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
         }
 
-        return input.equalsIgnoreCase(reversed);
+        return true;
     }
-}//t
+}
